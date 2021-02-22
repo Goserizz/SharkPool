@@ -40,7 +40,7 @@ def earn_log(worker, hashrate, contri, earn, now_bal):
 def settle_log(worker, deposit, remains):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} Settlement: {} deposits {} ETC, remains {} ETC".format(now_time, worker, deposit, remains))
+        f.writelines("{} Settlement: {} deposits {} ETC, remains {} ETC.\n".format(now_time, worker, deposit, remains))
 
 
 if __name__ == '__main__':
@@ -74,11 +74,11 @@ if __name__ == '__main__':
         earn_log(worker_name, hashrate, contri * 100, earn, workers[worker_name])
         if now_balance < balance:
             remains = now_balance * contri
-            deposit = workesr[worker_name] - remains
+            deposit = workers[worker_name] - remains
             workers[worker_name] = remains
             settle_log(worker_name, deposit, remains)
 
     with open('datas.json', mode='w') as f:
-        ret_json = {'balance': now_balance, 'workers': workers}
+        ret_json = {'balance': now_balance, 'all_balance': now_all_balance, 'workers': workers}
         json.dump(ret_json, f)
     
