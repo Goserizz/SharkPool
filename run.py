@@ -7,4 +7,5 @@ while True:
     time.sleep(1)
     now_time = time.localtime()
     if now_time.tm_hour in check_time and now_time.tm_sec == 0:
+        os.system("git add *")
         os.system("python3 mining_data.py")
