@@ -31,10 +31,10 @@ def balance_log(now_balance, now_earn):
         f.writelines("{} balance: {}, +{} ETH.\n".format(now_time, now_balance, now_earn))
 
 
-def earn_log(worker, hashrate, contri, earn):
+def earn_log(worker, hashrate, contri, earn, now_bal):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} {}: 4h hashrate is {}, contributes {:.2f}% calculation, earns {} ETH.\n".format(now_time, worker, hashrate, contri, earn))
+        f.writelines("{} {}: 4h hashrate is {}, contributes {:.2f}% calculation, earns {} ETH.({})\n".format(now_time, worker, hashrate, contri, earn, now_bal))
 
 
 if __name__ == '__main__':
@@ -64,8 +64,8 @@ if __name__ == '__main__':
         hashrate = worker['avg_30_hashrate']
         contri = hashrate / whole_cal
         earn = now_earn * contri
-        earn_log(worker_name, hashrate, contri * 100, earn)
         workers[worker_name] += earn
+        earn_log(worker_name, hashrate, contri * 100, earn, worker[worker_name])
     
     with open('datas.json', mode='w') as f:
         ret_json = {'balance': now_balance, 'workers': workers}
