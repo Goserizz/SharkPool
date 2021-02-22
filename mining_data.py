@@ -25,32 +25,38 @@ def get_workers(res_json):
     return active_workers
 
 
-def balance_log(now_balance, now_earn):
+def balance_log(now_balance, now_all_balance, now_earn):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} balance: {}, +{} ETH.\n".format(now_time, now_balance, now_earn))
+        f.writelines("{} balance: {}, all_balance: {}, +{} ETH.\n".format(now_time, now_balance, now_all_balance, now_earn))
 
 
 def earn_log(worker, hashrate, contri, earn, now_bal):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} {}: 4h hashrate is {}, contributes {:.2f}% calculation, earns {} ETH.({})\n".format(now_time, worker, hashrate, contri, earn, now_bal))
+        f.writelines("{} {}: 4h hashrate is {}, contributes {:.2f}% calculation, earns {}({} total) ETH.\n".format(now_time, worker, hashrate, contri, earn, now_bal))
+
+
+def settle_log(worker, deposit, remains):
+    now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
+    with open(log_file, mode='a') as f:
+        f.writelines("{} Settlement: {} deposits {} ETC, remains {} ETC".format(now_time, worker, deposit, remains))
 
 
 if __name__ == '__main__':
     res_json = get_data()
     now_workers = get_workers(res_json)
-    _, now_balance, _ = get_balance(res_json)
+    now_balance, now_all_balance, _ = get_balance(res_json)
     print(now_workers)
     
     with open('datas.json', mode='r') as f:
         datas = json.load(f)
         balance = datas['balance']
+        all_balance = datas['all_balance']
         workers = datas['workers']
     
-    print(type(now_balance))
-    now_earn = now_balance - balance
-    balance_log(now_balance, now_earn)
+    now_earn = now_all_balance - all_balance
+    balance_log(now_balance, now_all_balance, now_earn)
     whole_cal = 0
     
     for worker in now_workers:
@@ -65,8 +71,13 @@ if __name__ == '__main__':
         contri = hashrate / whole_cal
         earn = now_earn * contri
         workers[worker_name] += earn
-        earn_log(worker_name, hashrate, contri * 100, earn, worker[worker_name])
-    
+        earn_log(worker_name, hashrate, contri * 100, earn, workers[worker_name])
+        if now_balance < balance:
+            remains = now_balance * contri
+            deposit = workesr[worker_name] - remains
+            workers[worker_name] = remains
+            settle_log(worker_name, deposit, remains)
+
     with open('datas.json', mode='w') as f:
         ret_json = {'balance': now_balance, 'workers': workers}
         json.dump(ret_json, f)
