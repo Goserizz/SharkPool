@@ -22,7 +22,8 @@ def get_balance(res_json):
 
 def get_workers(res_json):
     active_workers = res_json['data']['miner']['activeWorkers']['list']
-    return active_workers
+    inactive_workers = res_json['data']['miner']['inactiveWorkers']['list']
+    return active_workers + inactive_workers
 
 
 def balance_log(now_balance, now_all_balance, now_earn):
