@@ -45,9 +45,9 @@ def settle_log(worker, deposit, remains):
 
 if __name__ == '__main__':
     res_json = get_data()
+    print(res_json)
     now_workers = get_workers(res_json)
     now_balance, now_all_balance, _ = get_balance(res_json)
-    print(now_workers)
     
     with open('datas.json', mode='r') as f:
         datas = json.load(f)
