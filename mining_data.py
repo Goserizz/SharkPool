@@ -72,7 +72,8 @@ if __name__ == '__main__':
         contri = hashrate / whole_cal
         earn = now_earn * contri
         workers[worker_name] += earn
-        earn_log(worker_name, hashrate, contri * 100, earn, workers[worker_name])
+        if contri > 0:
+            earn_log(worker_name, hashrate, contri * 100, earn, workers[worker_name])
         if now_balance < balance:
             remains = now_balance * contri
             deposit = workers[worker_name] - remains
