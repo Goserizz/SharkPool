@@ -44,6 +44,12 @@ def settle_log(worker, deposit, remains):
         f.writelines("{} Settlement: {} deposits {} ETC, remains {} ETC.\n".format(now_time, worker, deposit, remains))
 
 
+def del_log(worker):
+    now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
+    with open(log_file, mode='a') as f:
+        f.writelines("{} Deletion: {} is inactive and settled, deleted.\n".format(now_time, worker))
+
+
 if __name__ == '__main__':
     res_json = get_data()
     print(res_json)
@@ -61,12 +67,18 @@ if __name__ == '__main__':
     whole_cal = 0
     
     for worker in now_workers:
+        if worker['avg_30_hashrate'] == 0:
+            continue
         worker_name = worker['name']
         if worker_name not in workers:
             workers[worker_name] = 0
         whole_cal += worker['avg_30_hashrate']
+
+    settle_workers = list()
     
     for worker in now_workers:
+        if worker['avg_30_hashrate'] == 0:
+            continue
         worker_name = worker['name']
         hashrate = worker['avg_30_hashrate']
         contri = hashrate / whole_cal
@@ -79,8 +91,24 @@ if __name__ == '__main__':
             deposit = workers[worker_name] - remains
             workers[worker_name] = remains
             settle_log(worker_name, deposit, remains)
+            settle_workers.append(worker_name)
+    
+    if now_balance < balance:
+        for worker_name in workers.keys():
+            if worker_name in settle_workers:
+                continue
+            settle_log(worker_name, workers[worker_name], 0)
+            workers[woerker_name] = 0
+    
+    del_workers = list()
+    for worker_name in workers.keys():
+        if workers[worker_name] == 0:
+            del_workers.append(worker_name)
+    for worker_name in del_workers:
+        workers.pop(worker_name)
+        del_log(worker_name)
+
 
     with open('datas.json', mode='w') as f:
         ret_json = {'balance': now_balance, 'all_balance': now_all_balance, 'workers': workers}
-        json.dump(ret_json, f)
-    
+        json.dump(ret_json, f) 
