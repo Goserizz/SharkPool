@@ -98,7 +98,7 @@ if __name__ == '__main__':
             if worker_name in settle_workers:
                 continue
             settle_log(worker_name, workers[worker_name], 0)
-            workers[woerker_name] = 0
+            workers[worker_name] = 0
     
     del_workers = list()
     for worker_name in workers.keys():
