@@ -3,15 +3,16 @@ import json
 import time
 
 
-def log(log_info):
+def log(log_info, datas):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open('account.log', mode='a') as f:
         f.writelines('{} {}\n'.format(now_time, log_info))
+        f.writelines('Now Balance: ' + str(datas) + '\n')
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Account Management")
-    parser.add_argument('operation', type=str, help="Performing Operation")
+    parser.add_argument('operation', type=str, help="Performing Operation: clear | deposit | withdraw | info | sell")
     parser.add_argument('-u', '--user', type=str, help="Account Name")
     parser.add_argument('-a', '--amount', type=float, help="ETH Amount")
     args = parser.parse_args()
@@ -23,13 +24,13 @@ if __name__ == '__main__':
             datas[args.user] = 0
             info = "User {}'s balance is set to 0.".format(args.user)
             print(info)
-            log(info)
+            log(info, datas)
         else:
             for user in datas.keys():
                 datas[user] = 0
                 info = "User {}'s balance is set to 0.".format(user)
                 print(info)
-                log(info)
+                log(info, datas)
     elif args.operation == 'deposit':
         user = args.user
         if user not in datas.keys():
@@ -42,7 +43,7 @@ if __name__ == '__main__':
         datas[user] += amount
         info = "User {} deposits {}(now {}) ETH.".format(user, amount, datas[user])
         print(info)
-        log(info)
+        log(info, datas)
     elif args.operation == 'withdraw':
         user = args.user
         if user not in datas.keys():
@@ -58,7 +59,7 @@ if __name__ == '__main__':
         datas[user] -= amount
         info = "User {} withdraws {}(now {}) ETH.".format(user, amount, datas[user])
         print(info)
-        log(info)
+        log(info, datas)
     elif args.operation == 'info':
         tot_amount = 0
         for user in datas.keys():
@@ -77,6 +78,6 @@ if __name__ == '__main__':
             datas[user] = datas[user] / tot_amount * tot_remain
         info = "Sells {} ETH. Remains {} ETH now.".format(amount, tot_remain)
         print(info)
-        log(info)
+        log(info, datas)
     with open('account.json', mode='w') as f:
         json.dump(datas, f)
