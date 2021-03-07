@@ -1,6 +1,7 @@
 import argparse
 import json
 import time
+import os
 
 
 def log(log_info, datas):
@@ -86,4 +87,7 @@ if __name__ == '__main__':
     if args.operation != 'info':
         with open('account.json', mode='w') as f:
             json.dump(datas, f)
+        os.system("git add account.*")
+        os.system('git commit -m "balance update"')
+        os.system("git push -u origin main")
         
