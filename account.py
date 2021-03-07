@@ -42,7 +42,7 @@ if __name__ == '__main__':
             print("Invalid ETH Amount.")
             exit()
         datas[user] += amount
-        info = "User {} deposits {}(now {}) ETH. ({})".format(user, amount, datas[user], args.note)
+        info = "User {} deposits {} (now {}) ETH. ({})".format(user, amount, datas[user], args.note)
         print(info)
         log(info, datas)
     elif args.operation == 'withdraw':
@@ -58,7 +58,7 @@ if __name__ == '__main__':
             print("Insufficient Funds.")
             exit()
         datas[user] -= amount
-        info = "User {} withdraws {}(now {}) ETH. ({})".format(user, amount, datas[user], args.note)
+        info = "User {} withdraws {} (now {}) ETH. ({})".format(user, amount, datas[user], args.note)
         print(info)
         log(info, datas)
     elif args.operation == 'info':
