@@ -15,6 +15,7 @@ if __name__ == '__main__':
     parser.add_argument('operation', type=str, help="Performing Operation: clear | deposit | withdraw | info | sell")
     parser.add_argument('-u', '--user', type=str, help="Account Name")
     parser.add_argument('-a', '--amount', type=float, help="ETH Amount")
+    parser.add_argument('-n', '--note', type=str, help="Additional Description")
     args = parser.parse_args()
 
     with open('account.json', mode='r') as f:
@@ -28,7 +29,7 @@ if __name__ == '__main__':
         else:
             for user in datas.keys():
                 datas[user] = 0
-                info = "User {}'s balance is set to 0.".format(user)
+                info = "User {}'s balance is set to 0. ({})".format(user, args.note)
                 print(info)
                 log(info, datas)
     elif args.operation == 'deposit':
@@ -41,7 +42,7 @@ if __name__ == '__main__':
             print("Invalid ETH Amount.")
             exit()
         datas[user] += amount
-        info = "User {} deposits {}(now {}) ETH.".format(user, amount, datas[user])
+        info = "User {} deposits {}(now {}) ETH. ({})".format(user, amount, datas[user], args.note)
         print(info)
         log(info, datas)
     elif args.operation == 'withdraw':
@@ -57,7 +58,7 @@ if __name__ == '__main__':
             print("Insufficient Funds.")
             exit()
         datas[user] -= amount
-        info = "User {} withdraws {}(now {}) ETH.".format(user, amount, datas[user])
+        info = "User {} withdraws {}(now {}) ETH. ({})".format(user, amount, datas[user], args.note)
         print(info)
         log(info, datas)
     elif args.operation == 'info':
@@ -76,8 +77,13 @@ if __name__ == '__main__':
         tot_remain = tot_amount - amount
         for user in datas.keys():
             datas[user] = datas[user] / tot_amount * tot_remain
-        info = "Sells {} ETH. Remains {} ETH now.".format(amount, tot_remain)
+        info = "Sells {} ETH. Remains {} ETH now. ({})".format(amount, tot_remain, args.note)
         print(info)
         log(info, datas)
-    with open('account.json', mode='w') as f:
-        json.dump(datas, f)
+    else:
+        exit()
+    
+    if args.operation != 'info':
+        with open('account.json', mode='w') as f:
+            json.dump(datas, f)
+        
