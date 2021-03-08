@@ -54,6 +54,8 @@ def deposit(user, amount, note):
 
 
 def withdraw(user, amount, note):
+    with open('account.json', mode='r') as f:
+        datas = json.load(f)
     if user not in datas.keys():
         print("No {} Found.".format(user))
         exit()
@@ -71,6 +73,8 @@ def withdraw(user, amount, note):
 
 
 def sell(amount, note):
+    with open('account.json', mode='r') as f:
+        datas = json.load(f)
     tot_amount = 0
     for user in datas.keys():
         tot_amount += datas[user]
@@ -84,6 +88,8 @@ def sell(amount, note):
 
 
 def show_info():
+    with open('account.json', mode='r') as f:
+        datas = json.load(f)
     tot_amount = 0
     for user in datas.keys():
         tot_amount += datas[user]
