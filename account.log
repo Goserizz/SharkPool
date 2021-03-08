@@ -28,3 +28,11 @@ Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0.013249852683424535, 'gz': 0.002355348
 Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0.0023553480480626083}
 [2021-03-08 12:17:12] User gz's balance is set to 0. (鲨共一大闭幕)
 Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0}
+[2021-03-08 14:43:15] User lrf's balance is set to 0. (new code test)
+Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0}
+[2021-03-08 14:43:15] User ljj's balance is set to 0. (new code test)
+Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0}
+[2021-03-08 14:43:15] User rjj's balance is set to 0. (new code test)
+Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0}
+[2021-03-08 14:43:15] User gz's balance is set to 0. (new code test)
+Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0}
