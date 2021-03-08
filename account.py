@@ -42,7 +42,6 @@ def deposit(user, amount, note):
     if user not in datas.keys():
         print("No {} Found.".format(user))
         return()
-    amount = args.amount
     if amount <= 0:
         print("Invalid ETH Amount.")
         return()
