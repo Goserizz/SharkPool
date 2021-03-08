@@ -102,6 +102,7 @@ def show_info():
         print("{}\t{:.3f}\t\t{:.2f}".format(user, datas[user] * 1000, datas[user] / tot_amount * 100))
 
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Account Management")
     parser.add_argument('operation', type=str, help="Performing Operation: clear | deposit | withdraw | info | sell")
