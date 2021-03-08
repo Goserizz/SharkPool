@@ -41,11 +41,11 @@ def deposit(user, amount, note):
         datas = json.load(f)
     if user not in datas.keys():
         print("No {} Found.".format(user))
-        exit()
+        return()
     amount = args.amount
     if amount <= 0:
         print("Invalid ETH Amount.")
-        exit()
+        return()
     datas[user] += amount
     info = "User {} deposits {} (now {}) ETH. ({})".format(user, amount, datas[user], note)
     print(info)
@@ -58,13 +58,13 @@ def withdraw(user, amount, note):
         datas = json.load(f)
     if user not in datas.keys():
         print("No {} Found.".format(user))
-        exit()
+        return()
     if amount <= 0:
         print("Invalid ETH Amount.")
-        exit()
+        return()
     if amount > datas[user]:
         print("Insufficient Funds.")
-        exit()
+        return()
     datas[user] -= amount
     info = "User {} withdraws {} (now {}) ETH. ({})".format(user, amount, datas[user], note)
     print(info)
@@ -78,6 +78,9 @@ def sell(amount, note):
     tot_amount = 0
     for user in datas.keys():
         tot_amount += datas[user]
+    if amount > tot_amount:
+        print('Not Enough ETH.')
+        return
     tot_remain = tot_amount - amount
     for user in datas.keys():
         datas[user] = datas[user] / tot_amount * tot_remain
