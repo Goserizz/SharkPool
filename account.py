@@ -104,7 +104,7 @@ if __name__ == '__main__':
     if args.operation == 'clear':
         clear(args.user, args.note)
     elif args.operation == 'deposit':
-        clear(args.user, args.amount, args.note)
+        deposit(args.user, args.amount, args.note)
     elif args.operation == 'withdraw':
         withdraw(args.user, args.amount, args.note)
     elif args.operation == 'info':
