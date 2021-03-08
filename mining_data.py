@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 import requests
 import json
 import time
+import os
+from account import deposit as _deposit
 
 
 eth_address = '0x06519c33453b8b45c0884f48355602c17bf59d4e'
@@ -38,16 +40,29 @@ def earn_log(worker, hashrate, contri, earn, now_bal):
         f.writelines("{} {}: 4h hashrate is {}, contributes {:.2f}% calculation, earns {}({} total) ETH.\n".format(now_time, worker, hashrate, contri, earn, now_bal))
 
 
-def settle_log(worker, deposit, remains):
+def settle_log(worker, deposit_amount, remains):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} Settlement: {} deposits {} ETC, remains {} ETC.\n".format(now_time, worker, deposit, remains))
+        f.writelines("{} Settlement: {} deposits {} ETH, remains {} ETH.\n".format(now_time, worker, deposit_amount, remains))
 
 
 def del_log(worker):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
         f.writelines("{} Deletion: {} is inactive and settled, deleted.\n".format(now_time, worker))
+
+
+def no_account_warning(worker):
+    now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
+    with open(log_file, mode='a') as f:
+        f.writelines("{} {} has no account.\n".format(now_time, worker))
+
+
+def deposit(worker, worker2account, amount):
+    if worker not in worker2account.keys():
+        no_account_warning(worker)
+        return
+    _deposit(worker2account[worker], amount, "from {}".format(worker))
 
 
 if __name__ == '__main__':
@@ -62,6 +77,9 @@ if __name__ == '__main__':
         all_balance = datas['all_balance']
         workers = datas['workers']
     
+    with open('worker2account.json', mode='r') as f:
+        worker2account = json.load(f)
+    
     now_earn = now_all_balance - all_balance
     balance_log(now_balance, now_all_balance, now_earn)
     whole_cal = 0
@@ -73,6 +91,8 @@ if __name__ == '__main__':
         if worker_name not in workers:
             workers[worker_name] = 0
         whole_cal += worker['avg_30_hashrate']
+        if worker_name not in worker2account.keys():
+            no_account_warning(worker_name)
 
     settle_workers = list()
     
@@ -88,15 +108,17 @@ if __name__ == '__main__':
             earn_log(worker_name, hashrate, contri * 100, earn, workers[worker_name])
         if now_balance < balance:
             remains = now_balance * contri
-            deposit = workers[worker_name] - remains
+            deposit_amount = workers[worker_name] - remains
             workers[worker_name] = remains
-            settle_log(worker_name, deposit, remains)
+            deposit(worker_name, worker2account, deposit_amount)
+            settle_log(worker_name, deposit_amount, remains)
             settle_workers.append(worker_name)
     
     if now_balance < balance:
         for worker_name in workers.keys():
             if worker_name in settle_workers:
                 continue
+            deposit(worker_name, worker2account, workers[worker_name])
             settle_log(worker_name, workers[worker_name], 0)
             workers[worker_name] = 0
     
