@@ -6,3 +6,5 @@ An exclusive mining pool for shark man.
 - log: 查看日志文件
 - account.json: 查看账户收益
 - account.log: 查看账户操作日志
+
+This ledger is located in Shenzhen THU.
