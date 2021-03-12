@@ -89,17 +89,16 @@ def sell(amount, note):
     save(datas)
 
 
-def show_info():
+def show_info(amount=0):
     with open('account.json', mode='r') as f:
         datas = json.load(f)
     tot_amount = 0
     for user in datas.keys():
         tot_amount += datas[user]
     print("Total Amount: {:.3f} mETH.".format(tot_amount * 1000))
-    print("Name\tAmount/mETH\tShare/%")
+    print("Name\tAmount/mETH\tShare/%\t\tRMB/yuan")
     for user in datas.keys():
-        print("{}\t{:.3f}\t\t{:.2f}".format(user, datas[user] * 1000, datas[user] / tot_amount * 100))
-
+        print("{}\t{:.3f}\t\t{:.2f}\t\t{:.2f}".format(user, datas[user] * 1000, datas[user] / tot_amount * 100, datas[user] * amount))
 
 
 if __name__ == '__main__':
@@ -117,7 +116,10 @@ if __name__ == '__main__':
     elif args.operation == 'withdraw':
         withdraw(args.user, args.amount, args.note)
     elif args.operation == 'info':
-        show_info()
+        if args.amount:
+            show_info(args.amount)
+        else:
+            show_info()
     elif args.operation == 'sell':
         sell(args.amount, args.note)
     else:
