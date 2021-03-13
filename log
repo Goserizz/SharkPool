@@ -505,3 +505,24 @@
 [2021-03-13 08:01:00] MinerYi1080: 4h hashrate is 31666667, contributes 8.52% calculation, earns 0.000323766820132317(0.008573849485535079 total) ETH.
 [2021-03-13 08:01:00] MinerYi5700xt: 4h hashrate is 43333333, contributes 11.66% calculation, earns 0.0004430493247408954(0.01335127110261077 total) ETH.
 [2021-03-13 08:01:00] PMCx299: 4h hashrate is 90000000, contributes 24.22% calculation, earns 0.0009201793738478548(0.016263823147966393 total) ETH.
+[2021-03-13 12:00:12] balance: 0.00174, all_balance: 0.18131, +0.0033299999999999996 ETH.
+[2021-03-13 12:00:12] MinerHuden01: 4h hashrate is 88333333, contributes 26.37% calculation, earns 0.0008780596981791044(0.02484289183084792 total) ETH.
+[2021-03-13 12:00:14] Settlement: MinerHuden01 deposits 0.02438408586243001 ETH, remains 0.00045880596841791043 ETH.
+[2021-03-13 12:00:14] MinerJia: 4h hashrate is 60000000, contributes 17.91% calculation, earns 0.0005964179104477611(0.015405930809693194 total) ETH.
+[2021-03-13 12:00:15] Settlement: MinerJia deposits 0.015094289018648418 ETH, remains 0.0003116417910447761 ETH.
+[2021-03-13 12:00:15] MinerQIU: 4h hashrate is 58333333, contributes 17.41% calculation, earns 0.0005798507429552237(0.013098368058676342 total) ETH.
+[2021-03-13 12:00:17] Settlement: MinerQIU deposits 0.01279538298578082 ETH, remains 0.0003029850728955224 ETH.
+[2021-03-13 12:00:17] MinerYi1080: 4h hashrate is 26666667, contributes 7.96% calculation, earns 0.00026507463017910445(0.008838924115714183 total) ETH.
+[2021-03-13 12:00:18] Settlement: MinerYi1080 deposits 0.008700416651296273 ETH, remains 0.00013850746441791047 ETH.
+[2021-03-13 12:00:18] MinerYi5700xt: 4h hashrate is 45000000, contributes 13.43% calculation, earns 0.00044731343283582086(0.01379858453544659 total) ETH.
+[2021-03-13 12:00:20] Settlement: MinerYi5700xt deposits 0.01356485319216301 ETH, remains 0.00023373134328358208 ETH.
+[2021-03-13 12:00:20] PMCx299: 4h hashrate is 56666667, contributes 16.92% calculation, earns 0.000563283585402985(0.016827106733369377 total) ETH.
+[2021-03-13 12:00:21] Settlement: PMCx299 deposits 0.016532778373429077 ETH, remains 0.0002943283599402985 ETH.
+[2021-03-13 12:00:23] Settlement: MinerYi-5700xt deposits 0.0003066651194597314 ETH, remains 0 ETH.
+[2021-03-13 12:00:24] Settlement: MinerYi-1080 deposits 0.00025235002693325487 ETH, remains 0 ETH.
+[2021-03-13 12:00:26] Settlement: qiuqiu3070 deposits 0.0009495334798253738 ETH, remains 0 ETH.
+[2021-03-13 12:00:27] Settlement: MinerHuden02 deposits 0.002439645290034031 ETH, remains 0 ETH.
+[2021-03-13 12:00:27] Deletion: MinerYi-5700xt is inactive and settled, deleted.
+[2021-03-13 12:00:27] Deletion: MinerYi-1080 is inactive and settled, deleted.
+[2021-03-13 12:00:27] Deletion: qiuqiu3070 is inactive and settled, deleted.
+[2021-03-13 12:00:27] Deletion: MinerHuden02 is inactive and settled, deleted.
