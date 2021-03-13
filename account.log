@@ -49,3 +49,5 @@ Now Balance: {'lrf': 0, 'ljj': 0.013741351875391076, 'rjj': 0.01509524421348449,
 Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0.01509524421348449, 'gz': 0.026827893968593166, 'gzpy': 0.01652905463374658}
 [2021-03-13 12:25:36] User rjj's balance is set to 0.
 Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0.026827893968593166, 'gzpy': 0.01652905463374658}
+[2021-03-13 12:25:53] User gz's balance is set to 0.
+Now Balance: {'lrf': 0, 'ljj': 0, 'rjj': 0, 'gz': 0, 'gzpy': 0.01652905463374658}
