@@ -16,7 +16,7 @@ def save(datas):
         json.dump(datas, f)
     os.system("git add account.*")
     os.system('git commit -m "balance update"')
-    os.system("git push -u origin main")
+    os.system("git push")
 
 
 def clear(user, note):
