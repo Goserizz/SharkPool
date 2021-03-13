@@ -24,7 +24,7 @@ def clear(user, note):
         datas = json.load(f)
     if user:
         datas[user] = 0
-        info = "User {}'s balance is set to 0.".format(user)
+        info = "User {}'s balance is set to 0. ({})".format(user, note)
         print(info)
         log(info, datas)
     else:
