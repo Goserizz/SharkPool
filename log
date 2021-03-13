@@ -526,3 +526,11 @@
 [2021-03-13 12:00:27] Deletion: MinerYi-1080 is inactive and settled, deleted.
 [2021-03-13 12:00:27] Deletion: qiuqiu3070 is inactive and settled, deleted.
 [2021-03-13 12:00:27] Deletion: MinerHuden02 is inactive and settled, deleted.
+[2021-03-13 16:02:49] balance: 0.0054, all_balance: 0.18497, +0.0036599999999999966 ETH.
+[2021-03-13 16:02:49] MinerHuden01: 4h hashrate is 86666667, contributes 22.03% calculation, earns 0.0008064406797009473(0.0012652466481188577 total) ETH.
+[2021-03-13 16:02:49] MinerHuden02: 4h hashrate is 30000000, contributes 7.63% calculation, earns 0.0002791525418997412(0.0002791525418997412 total) ETH.
+[2021-03-13 16:02:49] MinerJia: 4h hashrate is 60000000, contributes 15.25% calculation, earns 0.0005583050837994824(0.0008699468748442585 total) ETH.
+[2021-03-13 16:02:49] MinerQIU: 4h hashrate is 61666667, contributes 15.68% calculation, earns 0.000573813561451163(0.0008767986343466853 total) ETH.
+[2021-03-13 16:02:49] MinerYi1080: 4h hashrate is 31666667, contributes 8.05% calculation, earns 0.0002946610195514217(0.0004331684839693322 total) ETH.
+[2021-03-13 16:02:49] MinerYi5700xt: 4h hashrate is 48333333, contributes 12.29% calculation, earns 0.00044974575884788816(0.0006834771021314702 total) ETH.
+[2021-03-13 16:02:49] PMCx299: 4h hashrate is 75000000, contributes 19.07% calculation, earns 0.000697881354749353(0.0009922097146896514 total) ETH.
