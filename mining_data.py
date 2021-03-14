@@ -1,4 +1,3 @@
-from bs4 import BeautifulSoup
 import requests
 import json
 import time
@@ -31,19 +30,19 @@ def get_workers(res_json):
 def balance_log(now_balance, now_all_balance, now_earn):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} balance: {}, all_balance: {}, +{} ETH.\n".format(now_time, now_balance, now_all_balance, now_earn))
+        f.writelines("{} balance: {}, all_balance: {}, +{:.5f} ETH.\n".format(now_time, now_balance, now_all_balance, now_earn))
 
 
 def earn_log(worker, hashrate, contri, earn, now_bal):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} {}: 4h hashrate is {}, contributes {:.2f}% calculation, earns {}({} total) ETH.\n".format(now_time, worker, hashrate, contri, earn, now_bal))
+        f.writelines("{} {}: 4h hashrate is {:.2f} MH/s, contributes {:.2f}% calculation, earns {:.6f}({:.6f} total) ETH.\n".format(now_time, worker, hashrate / 1000000, contri, earn, now_bal))
 
 
 def settle_log(worker, deposit_amount, remains):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     with open(log_file, mode='a') as f:
-        f.writelines("{} Settlement: {} deposits {} ETH, remains {} ETH.\n".format(now_time, worker, deposit_amount, remains))
+        f.writelines("{} Settlement: {} deposits {:.6f} ETH, remains {:.6f} ETH.\n".format(now_time, worker, deposit_amount, remains))
 
 
 def del_log(worker):
