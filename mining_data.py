@@ -7,7 +7,7 @@ from account import deposit as _deposit
 
 
 eth_address = '0x06519c33453b8b45c0884f48355602c17bf59d4e'
-url = "https://www.beepool.org/get_miner?coin=eth&wallet={}".format(eth_address)
+url = "https://www.beepool.com/get_miner?coin=eth&wallet={}".format(eth_address)
 log_file = 'log'
 
 
