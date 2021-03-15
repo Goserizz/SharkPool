@@ -58,10 +58,6 @@ def del_log(worker):
 def no_account_warning(worker):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
     log("{} {} has no account.\n".format(now_time, worker))
-    with open(log_file, mode='a') as f:
-        f.writelines("{} {} has no account.\n".format(now_time, worker))
-    with open(last_log_file, mode='a') as f:
-        f.writelines("{} {} has no account.\n".format(now_time, worker))
 
 
 def deposit(worker, worker2account, amount):
