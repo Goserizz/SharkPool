@@ -8,6 +8,7 @@ from account import deposit as _deposit
 eth_address = '0x06519c33453b8b45c0884f48355602c17bf59d4e'
 url = "https://www.beepool.com/get_miner?coin=eth&wallet={}".format(eth_address)
 log_file = 'log'
+last_log_file = 'last_log'
 
 
 def get_data():
@@ -27,34 +28,36 @@ def get_workers(res_json):
     return active_workers + inactive_workers
 
 
+def log(log_info):
+    with open(log_file, mode='a') as f:
+        f.writelines(log_info)
+    with open(last_log_file, mode='a') as f:
+        f.writelines(log_info)
+
+
 def balance_log(now_balance, now_all_balance, now_earn):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
-    with open(log_file, mode='a') as f:
-        f.writelines("{} balance: {}, all_balance: {}, +{:.5f} ETH.\n".format(now_time, now_balance, now_all_balance, now_earn))
+    log("{} balance: {}, all_balance: {}, +{:.5f} ETH.\n".format(now_time, now_balance, now_all_balance, now_earn))
 
 
 def earn_log(worker, hashrate, contri, earn, now_bal):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
-    with open(log_file, mode='a') as f:
-        f.writelines("{} {}: 4h hashrate is {:.2f} MH/s, contributes {:.2f}% calculation, earns {:.6f}({:.6f} total) ETH.\n".format(now_time, worker, hashrate / 1000000, contri, earn, now_bal))
+    log("{} {}: 4h hashrate is {:.2f} MH/s, contributes {:.2f}% calculation, earns {:.6f}({:.6f} total) ETH.\n".format(now_time, worker, hashrate / 1000000, contri, earn, now_bal))
 
 
 def settle_log(worker, deposit_amount, remains):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
-    with open(log_file, mode='a') as f:
-        f.writelines("{} Settlement: {} deposits {:.6f} ETH, remains {:.6f} ETH.\n".format(now_time, worker, deposit_amount, remains))
+    log("{} Settlement: {} deposits {:.6f} ETH, remains {:.6f} ETH.\n".format(now_time, worker, deposit_amount, remains))
 
 
 def del_log(worker):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
-    with open(log_file, mode='a') as f:
-        f.writelines("{} Deletion: {} is inactive and settled, deleted.\n".format(now_time, worker))
+    log("{} Deletion: {} is inactive and settled, deleted.\n".format(now_time, worker))
 
 
 def no_account_warning(worker):
     now_time = time.strftime("[%Y-%m-%d %H:%M:%S]", time.localtime())
-    with open(log_file, mode='a') as f:
-        f.writelines("{} {} has no account.\n".format(now_time, worker))
+    log("{} {} has no account.\n".format(now_time, worker))
 
 
 def deposit(worker, worker2account, amount):
@@ -65,6 +68,9 @@ def deposit(worker, worker2account, amount):
 
 
 if __name__ == '__main__':
+    if last_log_file in os.listdir('.'):
+        os.remove(last_log_file)
+
     res_json = get_data()
     print(res_json)
     now_workers = get_workers(res_json)
